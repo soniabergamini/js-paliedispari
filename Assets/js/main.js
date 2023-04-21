@@ -15,10 +15,10 @@ function isPal() {
     return false;
 }
 
-// FUNZIONE GIOCO PARI/DISPARI GENERA NUMERO CASUALE
+// FUNZIONE GIOCO PARI/DISPARI GENERA NUMERO CASUALE DA 1 A 5
 function getRandomNumber() {
 
-    let number = Math.floor(Math.random() * 101);
+    let number = Math.floor(Math.random() * 5 + 1);
     return number;
 
 }
@@ -66,22 +66,22 @@ if (inputPariDispari != "PARI" && inputPariDispari != "DISPARI") {
 } else {
 
     // Se il valore è valido l'utente continua:
-    let inputNumber = parseInt(prompt("Inserisci un numero:"));
+    let inputNumber = parseInt(prompt("Inserisci un numero da 1 a 5:"));
     let computerNumer = getRandomNumber();
     let sommaGioco = inputNumber + computerNumer;
     let gameResult = isEvenOrOdd(sommaGioco);
 
     // Controlla se l'input numero inserito è valido
-    if (isNaN(inputNumber)) {
+    if (isNaN(inputNumber) || inputNumber < 1 || inputNumber > 5) {
 
         // Se il valore non è valido la pagina automaticamente si ricarica
-        alert("Mi spiace, dato non valido. La prossima volta inserisci un numero digitando solo caratteri numerici. La pagina si ricarica in automatico.");
+        alert("Mi spiace, dato non valido. La prossima volta inserisci un numero da 1 a 5, digitando solo caratteri numerici. La pagina si ricarica in automatico.");
         reloadPage();
 
     } else {
         
         // Se il valore è valido l'utente continua:
-        alert("Gioco con te! Inserisco anch'io un numero casuale.");
+        alert("Gioco con te! Inserisco anch'io un numero casuale da 1 a 5.");
         alert(`Ora sommo i due numeri... se il risultato è ${inputPariDispari}, hai vinto!`);
         btnReload.classList.remove('dNone');
         btnReload.addEventListener("click", reloadPage);
