@@ -1,21 +1,17 @@
 // FUNZIONE PAROLA PALINDROMA
 function isPal() {
 
-    // ciclo for che scrive la parola al contrario
+    // Ciclo for che scrive la parola al contrario
     for (let i = word.length - 1; i >= 0; i--) {
         wordReverse += word[i];
-        // console.log("lettera per lettera al contrario:", wordReverse)
     }
-    
-    console.log("La parola al contrario è:", wordReverse);
+    // console.log("La parola al contrario è:", wordReverse);
 
-    // if controlla se la parola al contrario è uguale alla parola scritta dall'utente e la funzione restituisce true/false.
+    // Controlla se la parola al contrario è uguale alla parola scritta dall'utente
     if (wordReverse === word) {
-        // console.log(`${word} è palindroma!`);
         alert("La parola " + word + " è palindroma!");
         return true;
     } 
-    // console.log(`${word} NON è palindroma!`);
     alert("La parola " + word + " NON è palindroma!");
     return false;
 }
@@ -46,16 +42,16 @@ function isEvenOrOdd(num) {
 
 // Variabili Parola Palindroma
 let word = prompt("Inserisci una parola");
-console.log("L'utente scrive la parola: ", word);
 let wordReverse = "";
 let risultato = isPal(word);
-
-// PAROLA PALINDROMA: Stampa il risultato
-console.log("La parola è palindroma? La funzione dice:", risultato);
+// console.log("L'utente scrive la parola: ", word);
+// console.log("La parola è palindroma? La funzione dice:", risultato);
 
 // Variabili Gioco Pari/Dispari
+const gameResultPage = document.getElementById('game');
+const gameInfoPage = document.getElementById('gameInfo');
 let inputPariDispari = prompt("Scegli PARI o DISPARI? Scrivilo qui sotto:").toUpperCase()
-console.log("Per il gioco, l'utente sceglie:", inputPariDispari);
+// console.log("Per il gioco, l'utente sceglie:", inputPariDispari);
 
 // if controlla se l'input pari/dispari inserito è valido
 if (inputPariDispari != "PARI" && inputPariDispari != "DISPARI") {
@@ -82,19 +78,25 @@ if (inputPariDispari != "PARI" && inputPariDispari != "DISPARI") {
     } else {
         
         // Se il valore è valido l'utente continua:
-        console.log("Per il gioco, l'utente inserisce il numero:", inputNumber);
+        /* console.log("Per il gioco, l'utente inserisce il numero:", inputNumber);
         console.log("Per il gioco, il computer inserisce il numero:", computerNumer);
-        console.log("La somma dei due numeri è uguale a:", sommaGioco + ". Il numero è:", gameResult);
+        console.log("La somma dei due numeri è uguale a:", sommaGioco + ". Il numero è:", gameResult); */
         alert("Gioco con te! Inserisco anch'io un numero casuale.");
         alert(`Ora sommo i due numeri... se il risultato è ${inputPariDispari}, hai vinto!`);
 
         // Stampiamo nella pagina se l'utente ha vinto o perso:
         if (gameResult == inputPariDispari) {
-            document.getElementById('game').innerText = "HAI VINTO!"
-            document.getElementById('gameInfo').innerText = `Tu hai inserito il numero ${inputNumber}. Io ho inserito il numero ${computerNumer}. La somma (${sommaGioco}) è un numero ${gameResult}. Tu hai detto ${inputPariDispari}, quindi HAI VINTO!`
+
+            // Se ha vinto
+            gameResultPage.innerText = "HAI VINTO!"
+            gameInfoPage.innerText = `Tu hai inserito il numero ${inputNumber}. Io ho inserito il numero ${computerNumer}. La somma (${sommaGioco}) è un numero ${gameResult}. Tu hai detto ${inputPariDispari}, quindi HAI VINTO!`
+
         } else {
-            document.getElementById('game').innerText = "HAI PERSO!"
-            document.getElementById('gameInfo').innerText = `Tu hai inserito il numero ${inputNumber}. Io ho inserito il numero ${computerNumer}. La somma (${sommaGioco}) è un numero ${gameResult}. Tu hai detto ${inputPariDispari}, quindi hai perso.`
+
+            // Se ha perso
+            gameResultPage.innerText = "HAI PERSO!"
+            gameInfoPage.innerText = `Tu hai inserito il numero ${inputNumber}. Io ho inserito il numero ${computerNumer}. La somma (${sommaGioco}) è un numero ${gameResult}. Tu hai detto ${inputPariDispari}, quindi hai perso.`
+
         }
     }
 }
