@@ -20,6 +20,28 @@ function isPal() {
     return false;
 }
 
+// FUNZIONE GIOCO PARI/DISPARI GENERA NUMERO CASUALE
+function getRandomNumber() {
+
+    let number = Math.floor(Math.random() * 101)
+
+    return number;
+
+}
+
+// FUNZIONE GIOCO PARI/DISPARI CONTROLLA SE IL NUMERO É PARI O DISPARI
+function isEvenOrOdd(num) {
+    
+    let gameEvOd = "DISPARI"
+
+    // se è pari
+    if (num % 2 == 0) {
+        gameEvOd = "PARI"
+    }
+
+    return gameEvOd;
+}
+
 // DICHIARO VARIABILI
 
 // Variabili Parola Palindroma
@@ -35,7 +57,7 @@ console.log("La parola è palindroma? La funzione dice:", risultato);
 let inputPariDispari = prompt("Scegli PARI o DISPARI? Scrivilo qui sotto:").toUpperCase()
 console.log("Per il gioco, l'utente sceglie:", inputPariDispari);
 
-// IF CONTROLLA SE L'INPUT PARI/DISPARI INSERITO É VALIDO
+// if controlla se l'input pari/dispari inserito è valido
 if (inputPariDispari != "PARI" && inputPariDispari != "DISPARI") {
 
     // Se il valore non è valido la pagina automaticamente si ricarica
@@ -46,8 +68,11 @@ if (inputPariDispari != "PARI" && inputPariDispari != "DISPARI") {
 
     // Se il valore è valido l'utente continua:
     let inputNumber = parseInt(prompt("Inserisci un numero:"));
+    let computerNumer = getRandomNumber();
+    let sommaGioco = inputNumber + computerNumer;
+    let gameResult = isEvenOrOdd(sommaGioco);
 
-    // IF CONTROLLA SE L'INPUT NUMERO INSERITO É VALIDO
+    // if controlla se l'input numero inserito è valido
     if (isNaN(inputNumber)) {
 
         // Se il valore non è valido la pagina automaticamente si ricarica
@@ -58,6 +83,18 @@ if (inputPariDispari != "PARI" && inputPariDispari != "DISPARI") {
         
         // Se il valore è valido l'utente continua:
         console.log("Per il gioco, l'utente inserisce il numero:", inputNumber);
+        console.log("Per il gioco, il computer inserisce il numero:", computerNumer);
+        console.log("La somma dei due numeri è uguale a:", sommaGioco + ". Il numero è:", gameResult);
+        alert("Gioco con te! Inserisco anch'io un numero casuale.");
+        alert(`Ora sommo i due numeri... se il risultato è ${inputPariDispari}, hai vinto!`);
 
+        // Stampiamo nella pagina se l'utente ha vinto o perso:
+        if (gameResult == inputPariDispari) {
+            document.getElementById('game').innerText = "HAI VINTO!"
+            document.getElementById('gameInfo').innerText = `Tu hai inserito il numero ${inputNumber}. Io ho inserito il numero ${computerNumer}. La somma (${sommaGioco}) è un numero ${gameResult}. Tu hai detto ${inputPariDispari}, quindi HAI VINTO!`
+        } else {
+            document.getElementById('game').innerText = "HAI PERSO!"
+            document.getElementById('gameInfo').innerText = `Tu hai inserito il numero ${inputNumber}. Io ho inserito il numero ${computerNumer}. La somma (${sommaGioco}) è un numero ${gameResult}. Tu hai detto ${inputPariDispari}, quindi hai perso.`
+        }
     }
 }
