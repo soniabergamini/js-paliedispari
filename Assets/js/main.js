@@ -5,7 +5,6 @@ function isPal() {
     for (let i = word.length - 1; i >= 0; i--) {
         wordReverse += word[i];
     }
-    // console.log("La parola al contrario è:", wordReverse);
 
     // Controlla se la parola al contrario è uguale alla parola scritta dall'utente
     if (wordReverse === word) {
@@ -19,8 +18,7 @@ function isPal() {
 // FUNZIONE GIOCO PARI/DISPARI GENERA NUMERO CASUALE
 function getRandomNumber() {
 
-    let number = Math.floor(Math.random() * 101)
-
+    let number = Math.floor(Math.random() * 101);
     return number;
 
 }
@@ -28,14 +26,19 @@ function getRandomNumber() {
 // FUNZIONE GIOCO PARI/DISPARI CONTROLLA SE IL NUMERO É PARI O DISPARI
 function isEvenOrOdd(num) {
     
-    let gameEvOd = "DISPARI"
+    let gameEvOd = "DISPARI";
 
     // se è pari
     if (num % 2 == 0) {
-        gameEvOd = "PARI"
+        gameEvOd = "PARI";
     }
 
     return gameEvOd;
+}
+
+// FUNZIONE RICARICA PAGINA WEB 
+function reloadPage() {
+    window.location.reload();
 }
 
 // DICHIARO VARIABILI
@@ -44,21 +47,21 @@ function isEvenOrOdd(num) {
 let word = prompt("Inserisci una parola");
 let wordReverse = "";
 let risultato = isPal(word);
-// console.log("L'utente scrive la parola: ", word);
-// console.log("La parola è palindroma? La funzione dice:", risultato);
 
 // Variabili Gioco Pari/Dispari
 const gameResultPage = document.getElementById('game');
 const gameInfoPage = document.getElementById('gameInfo');
-let inputPariDispari = prompt("Scegli PARI o DISPARI? Scrivilo qui sotto:").toUpperCase()
-// console.log("Per il gioco, l'utente sceglie:", inputPariDispari);
+const btnReload = document.getElementById('btnReload');
+const win = "HAI VINTO!"
+const lose = "HAI PERSO"
+let inputPariDispari = prompt("Scegli PARI o DISPARI? Scrivilo qui sotto:").toUpperCase();
 
-// if controlla se l'input pari/dispari inserito è valido
+// Controlla se l'input pari/dispari inserito è valido
 if (inputPariDispari != "PARI" && inputPariDispari != "DISPARI") {
 
     // Se il valore non è valido la pagina automaticamente si ricarica
     alert("Mi spiace, dato non valido. La prossima volta inserisci solo la parola: pari. Oppure la parola: dispari. La pagina si ricarica in automatico.");
-    window.location.reload();
+    reloadPage();
 
 } else {
 
@@ -68,34 +71,35 @@ if (inputPariDispari != "PARI" && inputPariDispari != "DISPARI") {
     let sommaGioco = inputNumber + computerNumer;
     let gameResult = isEvenOrOdd(sommaGioco);
 
-    // if controlla se l'input numero inserito è valido
+    // Controlla se l'input numero inserito è valido
     if (isNaN(inputNumber)) {
 
         // Se il valore non è valido la pagina automaticamente si ricarica
         alert("Mi spiace, dato non valido. La prossima volta inserisci un numero digitando solo caratteri numerici. La pagina si ricarica in automatico.");
-        window.location.reload();
+        reloadPage();
 
     } else {
         
         // Se il valore è valido l'utente continua:
-        /* console.log("Per il gioco, l'utente inserisce il numero:", inputNumber);
-        console.log("Per il gioco, il computer inserisce il numero:", computerNumer);
-        console.log("La somma dei due numeri è uguale a:", sommaGioco + ". Il numero è:", gameResult); */
         alert("Gioco con te! Inserisco anch'io un numero casuale.");
         alert(`Ora sommo i due numeri... se il risultato è ${inputPariDispari}, hai vinto!`);
+        btnReload.classList.remove('dNone');
+        btnReload.addEventListener("click", reloadPage);
+        gameInfoPage.innerText = `Tu hai inserito il numero ${inputNumber}. Io ho inserito il numero ${computerNumer}. La somma (${sommaGioco}) è un numero ${gameResult}. Tu hai detto ${inputPariDispari}, quindi`;
 
         // Stampiamo nella pagina se l'utente ha vinto o perso:
         if (gameResult == inputPariDispari) {
 
             // Se ha vinto
-            gameResultPage.innerText = "HAI VINTO!"
-            gameInfoPage.innerText = `Tu hai inserito il numero ${inputNumber}. Io ho inserito il numero ${computerNumer}. La somma (${sommaGioco}) è un numero ${gameResult}. Tu hai detto ${inputPariDispari}, quindi HAI VINTO!`
+            gameResultPage.innerText = win;
+            gameInfoPage.innerText += ` ${win}`;
+            document.querySelector('.firework').classList.remove('dNone');
 
         } else {
 
             // Se ha perso
-            gameResultPage.innerText = "HAI PERSO!"
-            gameInfoPage.innerText = `Tu hai inserito il numero ${inputNumber}. Io ho inserito il numero ${computerNumer}. La somma (${sommaGioco}) è un numero ${gameResult}. Tu hai detto ${inputPariDispari}, quindi hai perso.`
+            gameResultPage.innerText = lose + " 🫤";
+            gameInfoPage.innerText += " " + lose.toLowerCase() + ".";
 
         }
     }
